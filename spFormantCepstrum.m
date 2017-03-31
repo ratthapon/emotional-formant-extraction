@@ -4,7 +4,7 @@ function [formant] = spFormantCepstrum(c, fs)
     x3 = c(1:length(c)/2); %as the cepstrum is symmetric, half the cepstral coef are used
     L = zeros(1, length(x3)); %defining liftering window
     L(1:15) = 1; %liftering window
-    x5 = real(x3*L); %low time lifted cepstrum
+    x5 = real(x3.*L'); %low time lifted cepstrum
     x6 = x5(1:15); %taking the non-zero cepstral coef from the low-time lifted cepstral sequence
 
     %8000 point FFT is taken to find the log magnitude spectrum to low-time lifted cepstral coef
