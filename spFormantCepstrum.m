@@ -13,15 +13,5 @@ function [formant] = spFormantCepstrum(c, fs)
     f6 = real(f6); % making sure that all the values obtained in the previous step are real
 
     %peak picking
-    formant = [];
-    k = 1;
-    for i = 2: length(f6)-1
-        if (f6(i-1)<f6(i)) && (f6(i+1)<f6(i))
-            formant_mag(k) = f6(i);
-            formant(k) = i;
-            k = k+1;
-        else
-            continue;
-        end
-    end
+    [~, formant] = findpeaks(f6);
 end
