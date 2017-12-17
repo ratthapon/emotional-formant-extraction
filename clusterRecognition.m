@@ -31,14 +31,6 @@ idxTest = 1:length(label);
 clsTrain = group;%(idxTrain);
 clsTest = label;%(idxTest);
 
-%% relocate feature order
-mfcc_train_2 = zeros( size(clsTrain, 1), size(mfcc_train, 2));
-mfcc_test_2 = zeros( size(clsTest, 1), size(mfcc_sample, 2));
-for i = 1:5
-    mfcc_train_2(:, ((i-1)*12)+1 : i*12) = mfcc_train(idxTrain, i:5:end);
-    mfcc_test_2(:, ((i-1)*12)+1 : i*12) = mfcc_sample(idxTest, i:5:end);
-end
-
 %% combination the features
 % mfcc_train_2 = mfcc_train;
 % mfcc_test_2 = mfcc_sample;
@@ -46,11 +38,14 @@ end
 % trainingFeat = [zscore(mfcc_train_2) ];
 % testFeat = [zscore(mfcc_test_2) ];
 
+trainingFeat = [zscore(trainFeat) ];
+testFeat = [zscore(testFeat) ];
+
 % trainingFeat = [zscore(mfcc_train_2) zscore(formant_upgrade_train(idxTrain, :))];
 % testFeat = [zscore(mfcc_test_2) zscore(formant_upgrade_sample(idxTest, :))];
 
-trainingFeat = [zscore(mfcc_train_2) zscore(formant_train(idxTrain, :))];
-testFeat = [zscore(mfcc_test_2) zscore(formant_sample(idxTest, :))];
+% trainingFeat = [zscore(mfcc_train_2) zscore(formant_train(idxTrain, :))];
+% testFeat = [zscore(mfcc_test_2) zscore(formant_sample(idxTest, :))];
 
 % trainingFeat = [zscore(formant_train(idxTrain, :))];
 % testFeat = [zscore(formant_sample(idxTest, :))];
